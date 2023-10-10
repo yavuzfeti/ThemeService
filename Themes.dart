@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kitx/Screens/Settings.dart';
 import 'package:kitx/Utils/Network.dart';
 import 'package:kitx/main.dart';
 
 // await Themes.takeMode(null);
 // ThemesWidget(),
+// ThemeWidget(update:(){setState((){});},),
 
 class Themes
 {
@@ -105,15 +107,16 @@ class Themes
   );
 }
 
-class ThemesWidget extends StatefulWidget
+class ThemeWidget extends StatefulWidget
 {
-  const ThemesWidget({super.key});
+  final VoidCallback? update;
+  const ThemeWidget({super.key,required this.update});
 
   @override
-  State<ThemesWidget> createState() => _ThemesWidgetState();
+  State<ThemeWidget> createState() => _ThemeWidgetState();
 }
 
-class _ThemesWidgetState extends State<ThemesWidget>
+class _ThemeWidgetState extends State<ThemeWidget>
 {
   @override
   Widget build(BuildContext context) {
@@ -121,20 +124,17 @@ class _ThemesWidgetState extends State<ThemesWidget>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-            style: TextStyle(
-                fontSize: 18, color: Themes.mainColor, fontFamily: "SFUI"),
-            "Koyu Mod"),
+          "Koyu Mod",
+          style: TextStyle(fontSize: 18, color: Themes.mainColor, fontFamily: "SFUI"),
+        ),
         Switch(
             hoverColor: Themes.mainColor,
             value: !Themes.mode,
             onChanged: (v) async {
               await Themes.changeMode(!v);
-              setState(() {
-                Themes.mode;
-              });
-              // Navigator.pushReplacement(
-              //     context, MaterialPageRoute(builder: (context) => Splash()));
-            }),
+              widget.update?.call();
+            },
+        ),
       ],
     );
   }
