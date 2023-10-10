@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kitx/Utils/Network.dart';
 import 'package:kitx/main.dart';
 
+// await Themes.takeMode(null);
+// ThemesWidget(),
+
 class Themes
 {
   static bool mode = true;
@@ -100,4 +103,39 @@ class Themes
       800: Colors.white70,
     },
   );
+}
+
+class ThemesWidget extends StatefulWidget
+{
+  const ThemesWidget({super.key});
+
+  @override
+  State<ThemesWidget> createState() => _ThemesWidgetState();
+}
+
+class _ThemesWidgetState extends State<ThemesWidget>
+{
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+            style: TextStyle(
+                fontSize: 18, color: Themes.mainColor, fontFamily: "SFUI"),
+            "Koyu Mod"),
+        Switch(
+            hoverColor: Themes.mainColor,
+            value: !Themes.mode,
+            onChanged: (v) async {
+              await Themes.changeMode(!v);
+              setState(() {
+                Themes.mode;
+              });
+              // Navigator.pushReplacement(
+              //     context, MaterialPageRoute(builder: (context) => Splash()));
+            }),
+      ],
+    );
+  }
 }
