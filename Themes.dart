@@ -4,7 +4,7 @@ import 'package:kitx/Utils/Network.dart';
 import 'package:kitx/main.dart';
 
 // await Themes.takeMode(null);
-// ThemesWidget(),
+// await Themes.takeMode(context);
 // ThemeWidget(update:(){setState((){});},),
 
 class Themes
